@@ -13,7 +13,7 @@ namespace OlympicQualifiers
         public void Start()
         {
             Console.WriteLine("Loading system...");
-
+            // Creates the menu
             while (running)
             {
                 Console.WriteLine("\n=== Olympic Swimming Qualifiers Menu ===");
@@ -27,7 +27,7 @@ namespace OlympicQualifiers
                 Console.WriteLine("8. Load from File");
                 Console.WriteLine("9. Exit");
                 Console.Write("Enter option (1-9): ");
-
+                // 
                 switch (Console.ReadLine())
                 {
                     case "1": AddCompetitor(); break;
@@ -69,7 +69,7 @@ namespace OlympicQualifiers
                 Console.Write("Hometown: ");
                 string hometown = Console.ReadLine();
 
-                // EVENT
+                
                 Console.Write("Event Number (1–100): ");
                 int eventNo = int.Parse(Console.ReadLine());
                 if (eventNo < 1 || eventNo > 100)
@@ -80,7 +80,7 @@ namespace OlympicQualifiers
                 if (string.IsNullOrWhiteSpace(venue))
                     throw new ArgumentException("Venue name must not be empty.");
 
-                Console.Write("Event DateTime (e.g. 2024-06-01 14:00): ");
+                Console.Write("Event DateTime (e.g. 21-05-1956 14:30): ");
                 string eventDate = Console.ReadLine();
 
                 Console.Write("Event Record Time (in seconds): ");
@@ -98,7 +98,7 @@ namespace OlympicQualifiers
 
                 var eventObj = new BreastStroke(eventNo, venue, eventDate, record, distance, winningTime);
 
-                // RESULT
+                
                 Console.Write("Placed (1–8): ");
                 int placed = int.Parse(Console.ReadLine());
                 if (placed < 1 || placed > 8)
@@ -111,7 +111,7 @@ namespace OlympicQualifiers
 
                 var result = new Result(placed, raceTime);
 
-                // COMP HISTORY
+
                 Console.Write("Most Recent Win Location: ");
                 string recentWin = Console.ReadLine();
 
@@ -130,7 +130,7 @@ namespace OlympicQualifiers
 
                 var history = new CompHistory(recentWin, careerWins, new List<string>(medals), personalBest);
 
-                // BUILD COMPETITOR
+                
                 var competitor = new Competitor(compNum, name, age, hometown, eventObj, result, history);
                 competition.AddCompetitor(competitor);
             }
@@ -139,6 +139,8 @@ namespace OlympicQualifiers
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
+        
+
 
         private void RemoveCompetitor()
         {

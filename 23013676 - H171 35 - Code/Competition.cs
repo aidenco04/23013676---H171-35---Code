@@ -75,7 +75,7 @@ namespace OlympicQualifiers.Models
                 foreach (var c in competitors)
                 {
                     sw.WriteLine(c.ToFile());
-                    sw.WriteLine(); // Blank line for readability
+                    sw.WriteLine(); 
                 }
             }
         }
@@ -95,28 +95,28 @@ namespace OlympicQualifiers.Models
                 {
                     if (i + 4 >= lines.Length) break;
 
-                    // Event line
+                    
                     var eventParts = lines[i].Split(',');
                     int eventNo = int.Parse(eventParts[0]);
                     string venue = eventParts[1];
                     string dateTime = eventParts[2];
                     double record = double.Parse(eventParts[3]);
 
-                    // BreastStroke line
+                    
                     var bsParts = lines[i + 1].Split(',');
                     int distance = int.Parse(bsParts[1]);
                     double winningTime = double.Parse(bsParts[2]);
 
                     var bsEvent = new BreastStroke(eventNo, venue, dateTime, record, distance, winningTime);
 
-                    // Result line
+                    
                     var resultParts = lines[i + 2].Split(',');
                     int placed = int.Parse(resultParts[0]);
                     double raceTime = double.Parse(resultParts[1]);
 
                     var result = new Result(placed, raceTime);
 
-                    // CompHistory line
+                    
                     var historyParts = lines[i + 3].Split(',');
                     string mostRecentWin = historyParts[0];
                     int careerWins = int.Parse(historyParts[1]);
@@ -125,7 +125,7 @@ namespace OlympicQualifiers.Models
 
                     var history = new CompHistory(mostRecentWin, careerWins, medals, personalBest);
 
-                    // Competitor line
+                    
                     var compParts = lines[i + 4].Split(',');
                     int compNum = int.Parse(compParts[0]);
                     string name = compParts[1];
@@ -144,7 +144,7 @@ namespace OlympicQualifiers.Models
             }
         }
 
-        // Extra required methods for interface use
+        
         public bool CheckCompetitor(int compNo)
         {
             return competitors.Any(c => c.CompNumber == compNo);
