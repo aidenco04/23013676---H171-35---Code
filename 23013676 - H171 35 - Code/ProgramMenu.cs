@@ -115,7 +115,7 @@ namespace OlympicQualifiers
                 Console.Write("Position placed (1–8): ");
                 int placed = int.Parse(Console.ReadLine());
                 if (placed < 1 || placed > 8)
-                    throw new ArgumentException("Placed must be between 1 and 8.");
+                    throw new ArgumentException("position placed must be between 1 and 8.");
 
                 //checks to see if race time is above 0
                 Console.Write("Race Time (sec): ");
