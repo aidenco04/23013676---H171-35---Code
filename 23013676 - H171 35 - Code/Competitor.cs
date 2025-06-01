@@ -17,7 +17,7 @@ namespace OlympicQualifiers.Models
         public Result Results { get; set; }
         public CompHistory History { get; set; }
 
-        public bool NewPB => IsNewPB(); // Automatically computed
+        public bool NewPB => IsNewPB(); 
 
         public Competitor(int number, string name, int age, string hometown,
                           BreastStroke compEvent, Result results, CompHistory history)
@@ -35,7 +35,7 @@ namespace OlympicQualifiers.Models
         {
             if (Results.RaceTime < History.PersonalBest)
             {
-                History.PersonalBest = Results.RaceTime; // Update PB
+                History.PersonalBest = Results.RaceTime; 
                 return true;
             }
             return false;

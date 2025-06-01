@@ -8,26 +8,26 @@ namespace OlympicQualifiers.Models
 {
     public class BreastStroke : Event
     {
-        public string EventType { get; set; } = "Breaststroke";  // Auto-set
+        public string EventType { get; set; } = "Breaststroke";  
         public int Distance { get; set; }
         public double WinningTime { get; set; }
         public bool NewRecord { get; private set; }
 
-        // Constructor: using venue name
+        
         public BreastStroke(int eventNo, string venue, string eventDateTime, double record,
                             int distance, double winningTime)
             : base(eventNo, venue, eventDateTime, record)
         {
             Distance = distance;
             WinningTime = winningTime;
-            NewRecord = IsNewRecord(); // Auto-check
+            NewRecord = IsNewRecord(); 
         }
 
         public bool IsNewRecord()
         {
             if (WinningTime < GetRecord())
             {
-                SetRecord(WinningTime); // Update record
+                SetRecord(WinningTime); 
                 return true;
             }
             return false;

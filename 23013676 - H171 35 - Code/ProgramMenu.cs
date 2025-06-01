@@ -13,7 +13,7 @@ namespace OlympicQualifiers
         public void Start()
         {
             Console.WriteLine("Loading system...");
-            // Creates the menu
+            
             while (running)
             {
                 Console.WriteLine("\n=== Olympic Swimming Qualifiers Menu ===");
@@ -27,7 +27,7 @@ namespace OlympicQualifiers
                 Console.WriteLine("8. Load from File");
                 Console.WriteLine("9. Exit");
                 Console.Write("Enter option (1-9): ");
-                // 
+                
                 switch (Console.ReadLine())
                 {
                     case "1": AddCompetitor(); break;

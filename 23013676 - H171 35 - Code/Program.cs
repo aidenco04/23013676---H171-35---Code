@@ -13,7 +13,7 @@ namespace OlympicQualifiers
         static void Main(string[] args)
         {
             ProgramMenu menu = new ProgramMenu();
-            menu.Start(); // Starts interactive menu
+            menu.Start(); 
         }
     }
 }

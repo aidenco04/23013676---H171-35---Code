@@ -9,13 +9,15 @@ namespace OlympicQualifiers.Models
 {
     public class Competition
     {
+        //creates list to hold all of the competitors
         private List<Competitor> competitors = new List<Competitor>();
 
         public void AddCompetitor(Competitor c)
         {
+            //adds a new competitor if competitor number doesnt already exist
             if (!competitors.Any(comp => comp.CompNumber == c.CompNumber))
             {
-                competitors.Add(c);
+                competitors.Add(c); //adds competitor to the list
                 Console.WriteLine("Competitor added.");
             }
             else
@@ -24,41 +26,49 @@ namespace OlympicQualifiers.Models
             }
         }
 
+        // asks user for competitor number and removes that specific competitor
         public void RemoveCompetitor(int compNo)
         {
             competitors.RemoveAll(c => c.CompNumber == compNo);
         }
 
+        //clears the full competitor list
         public void ClearAll()
         {
             competitors.Clear();
         }
 
+        //returns all competitors who were in a specific event
         public List<Competitor> GetAllByEvent(int eventNo)
         {
             return competitors.Where(c => c.CompEvent.EventNo == eventNo).ToList();
         }
 
+        //creates a dictionary that links competitor numbers to event numbers
         public Dictionary<int, int> CompIndex()
         {
             return competitors.ToDictionary(c => c.CompNumber, c => c.CompEvent.EventNo);
         }
 
+        //sorts the competitors by age
         public void SortCompetitorsByAge()
         {
             competitors = competitors.OrderBy(c => c.CompAge).ToList();
         }
 
+        //asks user for number and shows competitors that won more than that number
         public List<Competitor> Winners(int minWins)
         {
             return competitors.Where(c => c.History.CareerWins > minWins).ToList();
         }
 
+        //lists the competitors who have placed top 3
         public List<Competitor> GetQualifiers()
         {
             return competitors.Where(c => c.Results.IsQualified()).ToList();
         }
 
+        //prints all competitors
         public void PrintAll()
         {
             foreach (var c in competitors)
@@ -68,13 +78,14 @@ namespace OlympicQualifiers.Models
             }
         }
 
+        //saves the competitors and their details to a file
         public void SaveToFile(string filePath)
         {
             using (StreamWriter sw = new StreamWriter(filePath))
             {
                 foreach (var c in competitors)
                 {
-                    sw.WriteLine(c.ToFile());
+                    sw.WriteLine(c.ToFile()); 
                     sw.WriteLine(); 
                 }
             }

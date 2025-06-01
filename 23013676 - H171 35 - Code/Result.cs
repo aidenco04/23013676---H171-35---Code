@@ -10,7 +10,7 @@ namespace OlympicQualifiers.Models
     {
         public int Placed { get; set; }
         public double RaceTime { get; set; }
-        public bool Qualified => IsQualified(); // Automatically computed
+        public bool Qualified => IsQualified(); 
 
         public Result(int placed, double raceTime)
         {

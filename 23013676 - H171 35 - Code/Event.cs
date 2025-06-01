@@ -14,7 +14,7 @@ namespace OlympicQualifiers.Models
         public string EventDateTime { get; set; }
         protected double Record { get; set; }
 
-        // Constructor: uses venue name
+        
         public Event(int eventNo, string venue, string eventDateTime, double record)
         {
             EventNo = eventNo;
@@ -23,7 +23,7 @@ namespace OlympicQualifiers.Models
             Record = record;
         }
 
-        // Constructor overload: uses venue ID
+        
         public Event(int eventNo, int venueID, string eventDateTime, double record)
         {
             EventNo = eventNo;

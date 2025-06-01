@@ -29,7 +29,7 @@ namespace OlympicQualifiers.Models
 
         public string ToFile()
         {
-            string medalsFormatted = string.Join(";", Medals); // Use ; to avoid conflict with commas
+            string medalsFormatted = string.Join(";", Medals); 
             return $"{MostRecentWin},{CareerWins},{medalsFormatted},{PersonalBest}";
         }
     }
