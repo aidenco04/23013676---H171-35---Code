@@ -50,11 +50,13 @@ namespace OlympicQualifiers.Models
             return competitors.ToDictionary(c => c.CompNumber, c => c.CompEvent.EventNo);
         }
 
-        //sorts the competitors by age
+        // Sorts competitors by their age and then prints them
         public void SortCompetitorsByAge()
         {
             competitors = competitors.OrderBy(c => c.CompAge).ToList();
+            PrintAll(); // Show the sorted list right after sorting
         }
+
 
         //asks user for number and shows competitors that won more than that number
         public List<Competitor> Winners(int minWins)
