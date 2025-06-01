@@ -78,7 +78,7 @@ namespace OlympicQualifiers.Models
             }
         }
 
-        //saves the competitors and their details to a file
+        //saves the competitors and their details to a file.
         public void SaveToFile(string filePath)
         {
             using (StreamWriter sw = new StreamWriter(filePath))
