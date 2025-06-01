@@ -99,7 +99,7 @@ namespace OlympicQualifiers
                 var eventObj = new BreastStroke(eventNo, venue, eventDate, record, distance, winningTime);
 
                 
-                Console.Write("Placed (1–8): ");
+                Console.Write("Position placed (1–8): ");
                 int placed = int.Parse(Console.ReadLine());
                 if (placed < 1 || placed > 8)
                     throw new ArgumentException("Placed must be between 1 and 8.");
@@ -120,7 +120,7 @@ namespace OlympicQualifiers
                 if (careerWins < 0)
                     throw new ArgumentException("Career wins must be 0 or greater.");
 
-                Console.Write("Medals (comma-separated e.g. 2G,1S): ");
+                Console.Write("Medals Won (comma-separated e.g. 2G,1S): ");
                 string[] medals = Console.ReadLine().Split(',');
 
                 Console.Write("Personal Best Time: ");

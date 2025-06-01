@@ -85,12 +85,13 @@ namespace OlympicQualifiers.Models
             {
                 foreach (var c in competitors)
                 {
-                    sw.WriteLine(c.ToFile()); 
-                    sw.WriteLine(); 
+                    sw.WriteLine(c.ToFile()); //formats the competitor data into lines
+                    sw.WriteLine(); //adds blank line between each competitor
                 }
             }
         }
 
+        //loads competitor file
         public void LoadFromFile(string filePath)
         {
             try
@@ -101,26 +102,29 @@ namespace OlympicQualifiers.Models
                     return;
                 }
 
+                //reads details of competitor every 5 lines and creates competitor
                 var lines = File.ReadAllLines(filePath);
                 for (int i = 0; i < lines.Length; i += 6)
                 {
                     if (i + 4 >= lines.Length) break;
 
                     
+                    //line 1 - event information
                     var eventParts = lines[i].Split(',');
                     int eventNo = int.Parse(eventParts[0]);
                     string venue = eventParts[1];
                     string dateTime = eventParts[2];
                     double record = double.Parse(eventParts[3]);
 
-                    
+
+                    //line 2 - stroke type information
                     var bsParts = lines[i + 1].Split(',');
                     int distance = int.Parse(bsParts[1]);
                     double winningTime = double.Parse(bsParts[2]);
 
                     var bsEvent = new BreastStroke(eventNo, venue, dateTime, record, distance, winningTime);
 
-                    
+                    //line 3 - race results information
                     var resultParts = lines[i + 2].Split(',');
                     int placed = int.Parse(resultParts[0]);
                     double raceTime = double.Parse(resultParts[1]);
@@ -128,6 +132,7 @@ namespace OlympicQualifiers.Models
                     var result = new Result(placed, raceTime);
 
                     
+                    //line 4 - competitor history information
                     var historyParts = lines[i + 3].Split(',');
                     string mostRecentWin = historyParts[0];
                     int careerWins = int.Parse(historyParts[1]);
@@ -136,13 +141,14 @@ namespace OlympicQualifiers.Models
 
                     var history = new CompHistory(mostRecentWin, careerWins, medals, personalBest);
 
-                    
+                    //line 5 - competitor details
                     var compParts = lines[i + 4].Split(',');
                     int compNum = int.Parse(compParts[0]);
                     string name = compParts[1];
                     int age = int.Parse(compParts[2]);
                     string hometown = compParts[3];
 
+                    //puts all details into one competitor
                     var competitor = new Competitor(compNum, name, age, hometown, bsEvent, result, history);
                     AddCompetitor(competitor);
                 }
@@ -155,17 +161,19 @@ namespace OlympicQualifiers.Models
             }
         }
 
-        
+        //checks to see if competitor number exists
         public bool CheckCompetitor(int compNo)
         {
             return competitors.Any(c => c.CompNumber == compNo);
         }
 
+        //gets competitor by number
         public Competitor GetCompetitor(int compNo)
         {
             return competitors.FirstOrDefault(c => c.CompNumber == compNo);
         }
 
+        //gets event by number
         public BreastStroke GetEvent(int eventNo)
         {
             return competitors
