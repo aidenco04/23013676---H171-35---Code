@@ -7,13 +7,16 @@ namespace OlympicQualifiers
 {
     public class ProgramMenu
     {
+        //creates competition object to hold competitor
         private Competition competition = new Competition();
         private bool running = true;
 
+        //creates the menu loop
         public void Start()
         {
             Console.WriteLine("Loading system...");
             
+            //runs the menu until it is exited
             while (running)
             {
                 Console.WriteLine("\n=== Olympic Swimming Qualifiers Menu ===");
@@ -28,6 +31,7 @@ namespace OlympicQualifiers
                 Console.WriteLine("9. Exit");
                 Console.Write("Enter option (1-9): ");
                 
+                //runs chosen menu option
                 switch (Console.ReadLine())
                 {
                     case "1": AddCompetitor(); break;
@@ -44,15 +48,18 @@ namespace OlympicQualifiers
             }
         }
 
+        //asks user to input details to create competitor
         private void AddCompetitor()
         {
             try
             {
+                //checks to see if competitor id number is between 100-999
                 Console.Write("Enter Competitor Number (100–999): ");
                 int compNum = int.Parse(Console.ReadLine());
                 if (compNum < 100 || compNum > 999)
                     throw new ArgumentException("Competitor number must be between 100 and 999.");
 
+                //checks to see if number is already used
                 if (competition.CheckCompetitor(compNum))
                 {
                     Console.WriteLine("Competitor already exists.");
@@ -62,6 +69,7 @@ namespace OlympicQualifiers
                 Console.Write("Name: ");
                 string name = Console.ReadLine();
 
+                //checks to see if competitor age is over 0
                 Console.Write("Age: ");
                 int age = int.Parse(Console.ReadLine());
                 if (age <= 0) throw new ArgumentException("Age must be greater than zero.");
@@ -69,12 +77,13 @@ namespace OlympicQualifiers
                 Console.Write("Hometown: ");
                 string hometown = Console.ReadLine();
 
-                
+                //checks to see if event number is between 1-100
                 Console.Write("Event Number (1–100): ");
                 int eventNo = int.Parse(Console.ReadLine());
                 if (eventNo < 1 || eventNo > 100)
                     throw new ArgumentException("Event number must be 1–100.");
 
+                //makes sure user cant leave venue name blank
                 Console.Write("Venue Name: ");
                 string venue = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(venue))
@@ -86,35 +95,42 @@ namespace OlympicQualifiers
                 Console.Write("Event Record Time (in seconds): ");
                 double record = double.Parse(Console.ReadLine());
 
+                //checks to see if distance is between 50-100 meters
                 Console.Write("Distance (50–1500m): ");
                 int distance = int.Parse(Console.ReadLine());
                 if (distance < 50 || distance > 1500)
                     throw new ArgumentException("Distance must be between 50 and 1500.");
 
+                //checks to see if winning time is over 0
                 Console.Write("Winning Time (sec): ");
                 double winningTime = double.Parse(Console.ReadLine());
                 if (winningTime <= 0)
                     throw new ArgumentException("Winning time must be a positive number.");
 
+                //creates the breaststroke event object
                 var eventObj = new BreastStroke(eventNo, venue, eventDate, record, distance, winningTime);
 
                 
+                //checks to see if position placed is between 1-8
                 Console.Write("Position placed (1–8): ");
                 int placed = int.Parse(Console.ReadLine());
                 if (placed < 1 || placed > 8)
                     throw new ArgumentException("Placed must be between 1 and 8.");
 
+                //checks to see if race time is above 0
                 Console.Write("Race Time (sec): ");
                 double raceTime = double.Parse(Console.ReadLine());
                 if (raceTime <= 0)
                     throw new ArgumentException("Race time must be a positive number.");
 
+                //creates event results object
                 var result = new Result(placed, raceTime);
 
 
                 Console.Write("Most Recent Win Location: ");
                 string recentWin = Console.ReadLine();
 
+                //checks to see if career wins is above 0
                 Console.Write("Career Wins: ");
                 int careerWins = int.Parse(Console.ReadLine());
                 if (careerWins < 0)
@@ -123,11 +139,13 @@ namespace OlympicQualifiers
                 Console.Write("Medals Won (comma-separated e.g. 2G,1S): ");
                 string[] medals = Console.ReadLine().Split(',');
 
+                //checks to see if personal best time is above 0
                 Console.Write("Personal Best Time: ");
                 double personalBest = double.Parse(Console.ReadLine());
                 if (personalBest <= 0)
                     throw new ArgumentException("Personal best must be a positive number.");
 
+                //creates history object
                 var history = new CompHistory(recentWin, careerWins, new List<string>(medals), personalBest);
 
                 
@@ -136,12 +154,13 @@ namespace OlympicQualifiers
             }
             catch (Exception ex)
             {
+                //shows any input errors
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
         
 
-
+        //removes competitor by competitor number
         private void RemoveCompetitor()
         {
             Console.Write("Enter Competitor Number to remove: ");
@@ -156,6 +175,7 @@ namespace OlympicQualifiers
             }
         }
 
+        //shows all competitors who got place 3rd and above
         private void ViewQualifiers()
         {
             var qualifiers = competition.GetQualifiers();
@@ -163,6 +183,7 @@ namespace OlympicQualifiers
             else foreach (var c in qualifiers) Console.WriteLine(c);
         }
 
+        //shows competitors with chosen number of wins
         private void ViewWinners()
         {
             Console.Write("Enter minimum number of career wins: ");
@@ -178,16 +199,17 @@ namespace OlympicQualifiers
             }
         }
 
+       
         private void SaveToFile()
         {
-            string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-            string filePath = Path.Combine(downloadsPath, "competition_output.txt");
+            string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");//saves file to Downloads
+            string filePath = Path.Combine(downloadsPath, "competition_output.txt");//chooses name for file
 
             competition.SaveToFile(filePath);
             Console.WriteLine($"✅ File saved to: {filePath}");
         }
 
-
+        //loads file from full path to file.
         private void LoadFromFile()
         {
             Console.Write("Enter file name (e.g. data.txt): ");
